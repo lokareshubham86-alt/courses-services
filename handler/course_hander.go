@@ -3,6 +3,7 @@ package handler
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 
@@ -17,4 +18,13 @@ func GetCourses(c *fiber.Ctx) error {
 		c.Status(http.StatusBadGateway).JSON(err.Error())
 	}
 	return c.JSON(courses)
+}
+
+func GetCourseByID(c *fiber.Ctx) error {
+	id, _ := strconv.Atoi(c.Params("id"))
+	course, err := services.GetCourseByID(id)
+	if err != nil {
+		return c.Status(http.StatusBadGateway).JSON(err.Error())
+	}
+	return c.JSON(course)
 }

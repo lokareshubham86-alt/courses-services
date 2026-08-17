@@ -24,3 +24,16 @@ func GetCourses() ([]models.Courses, error) {
 	}
 	return structtype, nil
 }
+
+func GetCourseByID(id int) (models.Courses, error) {
+	query := `select id, name , price from courses where id=?`
+
+	var data models.Courses
+	var err error
+	rows := database.DB.QueryRow(query, id)
+	err = rows.Scan(&data.ID, &data.Name, &data.Price)
+	if err != nil {
+		return data, err
+	}
+	return data, nil
+}

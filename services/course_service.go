@@ -8,3 +8,7 @@ import (
 func GetCourses() ([]models.Courses, error) {
 	return repository.GetCourses()
 }
+
+func GetCourseByID(id int) (models.Courses, error) {
+	return repository.GetCourseByID(id)
+}
