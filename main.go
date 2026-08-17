@@ -1,12 +1,18 @@
 package main
 
 import (
-	"courses-services/database"
-)
+	"github.com/gofiber/fiber/v2"
 
-// "course-service/database"go mod
+	"courses-services/database"
+	"courses-services/routes"
+)
 
 func main() {
 	database.ConnectToDatabase()
 	database.CreateTable()
+
+	app := fiber.New()
+	//Routes set up
+	routes.SetUpRoutes(app)
+	app.Listen(":8000")
 }
